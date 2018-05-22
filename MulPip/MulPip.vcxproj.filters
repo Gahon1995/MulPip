@@ -15,7 +15,36 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="MulPip.ino" />
+    <None Include="src\MulPip.ino" />
+    <None Include="src\Control.ino" />
+    <None Include="src\Data.ino" />
+    <None Include="src\display.ino" />
+    <None Include="src\ESP8266.ino" />
+    <None Include="src\Init.ino" />
+    <None Include="src\Task.ino" />
+    <None Include="src\tools.ino" />
+    <None Include="..\README.md">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\.gitignore">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\.gitattributes">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
- 
+  <ItemGroup>
+    <ClInclude Include="__vm\.MulPip.vsarduino.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="__vm\.src.vsarduino.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Model.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mulpip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

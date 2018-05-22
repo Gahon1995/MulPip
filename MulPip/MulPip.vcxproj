@@ -47,10 +47,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>%(ForcedIncludeFiles)</ForcedIncludeFiles>
-      <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;$(ProjectDir)..\..\data\libraries\TaskScheduler\src;$(ProjectDir)..\..\data\libraries\ArduinoJson\src;$(ProjectDir)..\..\data\libraries\U8g2\src;D:\Program Files\Arduino\hardware\arduino\avr\libraries\SPI\src;D:\Program Files\Arduino\hardware\arduino\avr\libraries\Wire\src;D:\Program Files\Arduino\libraries;$(ProjectDir)..\..\data\libraries;D:\Program Files\Arduino\hardware\arduino\avr\libraries;D:\Program Files\Arduino\hardware\arduino\avr\cores\arduino;D:\Program Files\Arduino\hardware\arduino\avr\variants\mega;D:\Program Files\Arduino\hardware\tools\avr\avr\include;D:\Program Files\Arduino\hardware\tools\avr\avr\include\avr;D:\Program Files\Arduino\hardware\tools\avr\lib\gcc\avr\4.8.1\include;D:\Program Files\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.2\include;D:\Program Files\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ProjectDir)..\__vm\.src.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <PreprocessorDefinitions>__AVR_ATmega2560__;_VMDEBUG=1;F_CPU=16000000L;ARDUINO=10805;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -77,9 +77,23 @@
     <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="MulPip.ino">
-      <FileType>CppCode</FileType>
-    </None>
+    <None Include="..\.gitattributes" />
+    <None Include="..\.gitignore" />
+    <None Include="..\README.md" />
+    <None Include="src\Control.ino" />
+    <None Include="src\Data.ino" />
+    <None Include="src\display.ino" />
+    <None Include="src\ESP8266.ino" />
+    <None Include="src\Init.ino" />
+    <None Include="src\MulPip.ino" />
+    <None Include="src\Task.ino" />
+    <None Include="src\tools.ino" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Model.h" />
+    <ClInclude Include="src\mulpip.h" />
+    <ClInclude Include="__vm\.MulPip.vsarduino.h" />
+    <ClInclude Include="__vm\.src.vsarduino.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
