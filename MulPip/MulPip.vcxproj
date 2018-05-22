@@ -90,9 +90,8 @@
     <None Include="src\tools.ino" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Model.h" />
-    <ClInclude Include="src\mulpip.h" />
-    <ClInclude Include="__vm\.MulPip.vsarduino.h" />
+    <ClInclude Include="src\include\Model.h" />
+    <ClInclude Include="src\include\mulpip.h" />
     <ClInclude Include="__vm\.src.vsarduino.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

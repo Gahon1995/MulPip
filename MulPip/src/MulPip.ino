@@ -1,6 +1,6 @@
 //头文件包含
 
-# include "mulpip.h"  
+# include "./include/mulpip.h"  
 
 
 //全局变量定义
