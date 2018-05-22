@@ -4,13 +4,15 @@
 
 
 //全局变量定义
-Scheduler ts;
 
+Scheduler ts;	//任务管理器
+
+//主要运行任务定义
 Task tDisplay(0.07 * CLOCK_SECOND, TASK_FOREVER, MyDisplay, &ts, true);	//显示任务
 Task tWiFi(0.5 * CLOCK_SECOND, TASK_FOREVER, MyWiFi, &ts, true);		//WiFi接收任务
 Task tStatus(0.01 * CLOCK_SECOND, TASK_FOREVER, MyStatus,NULL,false,NULL, disableMyStatus);		//检查机器运行状态任务
 
-//管道模拟任务												
+//模拟管道运行状态任务												
 Task tPIP1(0.001 * CLOCK_SECOND, TASK_FOREVER, PIP1, &ts, true);
 Task tPIP2(0.001 * CLOCK_SECOND, TASK_FOREVER, PIP2, &ts, true);
 Task tPIP3(0.001 * CLOCK_SECOND, TASK_FOREVER, PIP3, &ts, true);
@@ -26,19 +28,16 @@ U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);
 volatile PIPCONFIG pip1, pip2, pip3;
 
 volatile CONINFO conPIP1, conPIP2, conPIP3;
+//WIFISTATE wifistate;
+volatile WIFIDATA wifidata;
 
-volatile INFO wifidata;
-String recv = "";
-String tmp_recv = "";
-
+//String recv = "";
+//String tmp_recv = "";
 
 volatile int STATUS = SEND_ALLOWED;
 volatile int isFINISHED = JOB_UNFINISH; //标志： 判断当前管道是否完成配置
-
 volatile int FLAG_jobStatus = JOB_FINISH;
-
-
-volatile bool isWifiOpen;
+//volatile bool WIFISTATE.isOpen;
 
 
 
@@ -49,7 +48,7 @@ void setup()
 	//初始化引脚
 	initPIN();
 	//初始化硬件
-	isWifiOpen=init_WIFI(); //WIFI名称目前写死
+	WIFISTATE.isOpen=init_WIFI(); //WIFI名称目前写死
 	//初始化WIFI出书过来的信息保存目标
 	initWiFiConfig();
 	//初始化模拟管道的数据

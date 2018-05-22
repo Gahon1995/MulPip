@@ -82,17 +82,12 @@ bool sendData(int data) {
 	/*Serial.print("send:");
 	Serial.println(String(data));*/
 	return sendString(String(data));
-	/**************************************************
-	*发送数据状态码：
-	*    404  ---->  发送数据的格式错误
-	*	  111  ---->  当前没有处理进程，可以发送数据
-	*	  110  ---->  当前有处理进程，不能接收数据
-	**************************************************/
+
 }
 
 String recvString() {
 	char a;
-	tmp_recv = "";
+	String tmp_recv = "";
 	//if (Serial1.available())
 	//{
 	//Serial.print("Serial1.available:  ");

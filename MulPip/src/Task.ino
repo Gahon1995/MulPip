@@ -23,7 +23,7 @@ void MyWiFi() {
 	}
 	//Serial.print("run MyWiFi...STATUS: ");
 	//Serial.println(STATUS);
-	if (isWifiOpen) {
+	if (WIFISTATE.isOpen) {
 		if (FLAG_tWiFi && STATUS == SEND_ALLOWED) {
 			FLAG_tWiFi = false;
 			//Serial.println("recv WiFi data");
@@ -43,7 +43,7 @@ void MyWiFi() {
 	}
 	else {
 		//Serial.println("WiFi open failed, try to restart wifi...");
-		isWifiOpen = init_WIFI();
+		WIFISTATE.isOpen = init_WIFI();
 		tWiFi.enableDelayed(3000);
 	}
 }

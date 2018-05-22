@@ -1,14 +1,22 @@
+struct 
+{
+	volatile bool isOpen=false;
+	bool isConnected = false;
+	int connectedId = -1;
+}WIFISTATE;
+
 
 //Wi-Fi–≈œ¢±£¥Ê
-typedef struct INFO
+typedef struct WIFIDATA
 {
+	
 	int num_1;
 	int num_2;
 	int num_3;
 	int vol_1;
 	int vol_2;
 	int vol_3;
-}INFO;
+};
 
 
 typedef struct CONINFO
@@ -22,13 +30,13 @@ typedef struct CONINFO
 };
 
 
-typedef struct CONFIG
-{
-	int num;
-	double flow;
-	int pip;
-	int switchKey;
-};
+//typedef struct CONFIG
+//{
+//	int num;
+//	double flow;
+//	int pip;
+//	int switchKey;
+//};
 
 typedef struct PIPCONFIG
 {

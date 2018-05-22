@@ -1,13 +1,13 @@
 int recvWifiData() {
 	//有信息，需要接收，然后处理
-	recv = "";
+	String recv = "";
 	int flag_RECV,flag_Data;
 	String data="";
-	flag_Data =getRightData();
+	flag_Data =getRightData(recv);
 
 	if (flag_Data == 1) {
 		initWiFiConfig();
-		flag_RECV = formatData();
+		flag_RECV = formatData(recv);
 		//flag = revData(); //接收信息，并且保存到config结构体中
 		//printConfig(); //打印接收到的信息，供调试使用
 		if (flag_RECV == FIND_STATUS) {
@@ -34,7 +34,7 @@ int recvWifiData() {
 	/***********TODO --- 硬件复位，或者变量复位***********************/
 }
 
-int getRightData() {
+int getRightData(String &recv) {
 	String tmpdata="";
 	int flag = 0;
 	delay(1);
@@ -48,11 +48,16 @@ int getRightData() {
 		Serial.println(pos);*/
 		recv = tmpdata.substring(pos + 1, tmpdata.length());
 	}
+	else if (tmpdata.indexOf(",CONNECTED") != -1) {
+		Serial.print("have connection");
+		int id;
+		id = tmpdata.toInt()  ;
+	}
 	return flag;
 }
 
 
-int formatData() {
+int formatData(String &recv) {
 	//String data;
 	int flagRecv;
 	//flagRecv = getRightData(data);
