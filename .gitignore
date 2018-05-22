@@ -3,6 +3,7 @@
 
 
 __vm/
+lib/
 # User-specific files
 *.suo
 *.user
