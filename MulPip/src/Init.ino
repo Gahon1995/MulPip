@@ -72,10 +72,13 @@ void initData() {
 void initPIP() {
 	pip1.state = false;
 	pip1.flow = 0.0;
+	pip1.step = STEP;
 	
 	pip2.state = false;
 	pip2.flow = 0.0;
+	pip2.step = STEP;
 
 	pip3.state = false;
 	pip3.flow = 0.0;
+	pip3.step = STEP;
 }

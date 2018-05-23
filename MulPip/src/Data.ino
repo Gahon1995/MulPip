@@ -3,14 +3,16 @@ int recvWifiData() {
 	String recv = "";
 	int flag_RECV,flag_Data;
 	String data="";
-	flag_Data =getRightData(recv);
+	int id;
+	flag_Data =getRightData(recv,id);
 
-	if (flag_Data == 1) {
+	if (flag_Data == 1&&id == WIFISTATE.connectedId) {
 		initWiFiConfig();
 		flag_RECV = formatData(recv);
 		//flag = revData(); //接收信息，并且保存到config结构体中
 		//printConfig(); //打印接收到的信息，供调试使用
 		if (flag_RECV == FIND_STATUS) {
+
 			sendData(WIFISTATE.isAllowSend);
 		}
 		if (WIFISTATE.isAllowSend == SEND_REJECT) {	//当前不允许接收数据
@@ -27,16 +29,21 @@ int recvWifiData() {
 		}
 		else if (flag_RECV == RECV_FAILD) {
 			sendData(RECV_FAILD);
-		}
-			
+		}			
 	}
+	else if (id != WIFISTATE.connectedId) {
+		sendData(HAVE_CONNECTION,id);
+	}
+	recv = "";
+	data = "";
 	return STOP;	
 	/***********TODO --- 硬件复位，或者变量复位***********************/
 }
 
-int getRightData(String &recv) {
+int getRightData(String &recv,int &mid) {
 	String tmpdata="";
 	int flag = 0;
+	int id=-1;
 	delay(1);
 	tmpdata = recvString();
 	Serial.print("data recv: ");
@@ -46,15 +53,42 @@ int getRightData(String &recv) {
 		int pos = tmpdata.indexOf(":");
 		/*Serial.print("':'pos:");
 		Serial.println(pos);*/
+		int i = tmpdata.indexOf(",");
+		mid = tmpdata.substring(i + 1, i + 2).toInt();
+		Serial.print("data id: :");
+		Serial.println(mid);
 		recv = tmpdata.substring(pos + 1, tmpdata.length());
 	}
-	else if (tmpdata.indexOf(",CONNECTED") != -1) {
-		Serial.print("have connection: id = ");
-		int id;
-		id = tmpdata.toInt()  ;
-		Serial.println(id);
-		WIFISTATE.connectedId = id;
-		WIFISTATE.isConnected = true;
+	else {
+		if (tmpdata.indexOf(",CONNECT") != -1) {
+			Serial.print("have connection: id = ");
+			
+			id = tmpdata.substring(0,1).toInt();
+			Serial.println(id);
+			mid = id;
+			//Serial.println(WIFISTATE.connectedId);
+			if (WIFISTATE.connectedId == -1) {
+				WIFISTATE.connectedId = id;
+				WIFISTATE.isConnected = true;
+				sendData(CONNECCT_SUCESS);
+			}
+			else {
+				Serial.println(WIFISTATE.connectedId);
+				sendData(HAVE_CONNECTION,id);
+			}
+			
+		}
+		else if (tmpdata.indexOf(",CLOSED") != -1) {
+			Serial.print("disconnection: id = ");
+			//int id;
+			id = tmpdata.substring(0, 1).toInt();	//取连接号
+			Serial.println(id);
+			mid = -1;
+			if (id == WIFISTATE.connectedId) {
+				WIFISTATE.connectedId = -1;
+				WIFISTATE.isConnected = false;
+			}
+		}
 	}
 	return flag;
 }

@@ -29,9 +29,12 @@
 #define SEND_ALLOWED 200	//可以发送数据
 #define SEND_REJECT 201		//拒绝发送指令
 #define FIND_STATUS 111 //查询命令
+#define CONNECCT_SUCESS 103
+#define HAVE_CONNECTION 104		//已经有一个连接了，请等待之后的连接
 
 /***机器运行相关*******/
 #define START_FAILD 400		//接收数据成功，但是无法启动机器，硬件问题
+#define JOB_RUNNING 403		//完成整套配置过程
 #define JOB_FINISH 401		//完成整套配置过程
 #define JOB_UNFINISH 402	//机器执行过程出错，配置失败
 
@@ -67,7 +70,9 @@
 #define VOL_MIN 0
 #define START 1
 #define STOP 0
-#define CLOCK_SECOND 1000
+
+#define STEP 0.8
+
 
 //函数声明
 

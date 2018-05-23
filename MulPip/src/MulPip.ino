@@ -8,19 +8,19 @@
 Scheduler ts;	//任务管理器
 
 //主要运行任务定义
-Task tDisplay(0.07 * CLOCK_SECOND, TASK_FOREVER, MyDisplay, &ts, true);	//显示任务
-Task tWiFi(0.5 * CLOCK_SECOND, TASK_FOREVER, MyWiFi, &ts, true);		//WiFi接收任务
-Task tStatus(0.01 * CLOCK_SECOND, TASK_FOREVER, MyStatus,NULL,false,NULL, disableMyStatus);		//检查机器运行状态任务
+Task tDisplay(0.01 * TASK_SECOND, TASK_FOREVER, MyDisplay, &ts, true);	//显示任务
+Task tWiFi(0.5 * TASK_SECOND, TASK_FOREVER, MyWiFi, &ts, true);		//WiFi接收任务
+Task tStatus(0.001 * TASK_SECOND, TASK_FOREVER, MyStatus,NULL,false,NULL, disableMyStatus);		//检查机器运行状态任务
 
 //模拟管道运行状态任务												
-Task tPIP1(0.001 * CLOCK_SECOND, TASK_FOREVER, PIP1, &ts, true);
-Task tPIP2(0.001 * CLOCK_SECOND, TASK_FOREVER, PIP2, &ts, true);
-Task tPIP3(0.001 * CLOCK_SECOND, TASK_FOREVER, PIP3, &ts, true);
+Task tPIP1(0.001 * TASK_SECOND, TASK_FOREVER, PIP1, &ts, true);
+Task tPIP2(0.001 * TASK_SECOND, TASK_FOREVER, PIP2, &ts, true);
+Task tPIP3(0.001 * TASK_SECOND, TASK_FOREVER, PIP3, &ts, true);
 
 //机器控制任务，未启用
-Task tConPIP1(0.1 * CLOCK_SECOND, TASK_FOREVER, controlPIP1, NULL, false, NULL, FinishPIP1);
-Task tConPIP2(0.1 * CLOCK_SECOND, TASK_FOREVER, controlPIP2, NULL, false, NULL, FinishPIP2);
-Task tConPIP3(0.1 * CLOCK_SECOND, TASK_FOREVER, controlPIP3, NULL, false, NULL, FinishPIP3);
+Task tConPIP1(0.001 * TASK_SECOND, TASK_FOREVER, controlPIP1, NULL, false, NULL, FinishPIP1);
+Task tConPIP2(0.001 * TASK_SECOND, TASK_FOREVER, controlPIP2, NULL, false, NULL, FinishPIP2);
+Task tConPIP3(0.001 * TASK_SECOND, TASK_FOREVER, controlPIP3, NULL, false, NULL, FinishPIP3);
 
 //显示屏声明
 U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);
@@ -64,5 +64,4 @@ void setup()
 void loop()
 {
 	ts.execute();
-
 }

@@ -3,7 +3,7 @@ struct
 	volatile bool isOpen=false;
 	bool isConnected = false;
 	int connectedId = -1;
-	volatile int isAllowSend= 201;	//SEND_REJECT
+	volatile int isAllowSend= 200;	//SEND_REJECT
 }WIFISTATE;
 
 
@@ -44,4 +44,5 @@ typedef struct PIPCONFIG
 	//int control;	//是否进行控制标志
 	volatile double flow;	//实时流量
 	volatile bool state;	//开关状态
+	volatile double step;
 };

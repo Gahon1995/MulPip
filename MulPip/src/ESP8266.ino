@@ -70,20 +70,25 @@ bool init_WIFI() {
 		Serial.println("AT+CIPSERVER=1,8086 is failed");
 		 return false;
 	}
-	WIFISTATE.isOpen = true;
+	//WIFISTATE.isOpen = true;
 	WIFISTATE.isAllowSend = SEND_ALLOWED;
 	return true;
 }
-
-
 
 bool sendData(int data) {
 	//----TODO 将所有的发送命令统一到一起，方便统一管理
 
 	/*Serial.print("send:");
 	Serial.println(String(data));*/
-	return sendString(String(data));
+	return sendString(String(data), WIFISTATE.connectedId);
+}
 
+bool sendData(int data,int id) {
+	//----TODO 将所有的发送命令统一到一起，方便统一管理
+
+	/*Serial.print("send:");
+	Serial.println(String(data));*/
+	return sendString(String(data),id);
 }
 
 String recvString() {
@@ -103,14 +108,16 @@ String recvString() {
 		}
 		//Serial.println(tmp_recv);	
 	//}
-		Look();
+		//Look();
 		//Serial1.flush();
 	return tmp_recv;
 }
 
-bool sendString(String sysdata) {
+bool sendString(String sysdata,int id) {
 	bool flag;
-	Serial1.print(F("AT+CIPSEND=0,"));
+	Serial1.print(F("AT+CIPSEND="));
+	Serial1.print(id);
+	Serial1.print(F(","));
 	Serial1.println(sysdata.length());
 	if (Serial1.find(">")) //healthy response
 	{
@@ -127,6 +134,11 @@ bool sendString(String sysdata) {
 	}else return  false;
 	
 }
+
+void disConnect() {
+	//TODO 添加断开连接方法
+}
+
 
 void Look() {
 	//Serial1.print(F("AT+CIPSTATUS"));

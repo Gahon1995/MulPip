@@ -14,22 +14,29 @@ void drawLogo() {
 	u8g2.drawStr(28, 25, "Multi-pipe");
 	u8g2.setFont(u8g2_font_8x13B_tr);
 	u8g2.drawStr(10, 40, "control system");  //8px
-	drawInfo(20,62,"   no connection...");
+	u8g2.drawStr(20,62,"no connection...");
 	u8g2.sendBuffer();
 }
 
-void drawInfo(int x, int y,char * info) {
-	//char s[100];
-	//info.toCharArray(s,info.length);
-	u8g2.setFont(u8g2_font_ncenB08_tr);
-	u8g2.drawStr(x, y,info);
+void drawCon() {
+	u8g2.clearBuffer();
+	u8g2.setFont(u8g2_font_helvB12_tr);			//12px
+	u8g2.drawStr(28, 25, "Multi-pipe");
+	u8g2.setFont(u8g2_font_8x13B_tr);
+	u8g2.drawStr(10, 40, "control system");  //8px
+	u8g2.setCursor(20, 62);
+	u8g2.print("connect id:");
+	u8g2.print(WIFISTATE.connectedId);
+	//u8g2.drawStr(20, 62, "connect id:");
+
+	u8g2.sendBuffer();
 }
 
 void drawDisplay() {
 	//u8g2.clearDisplay();
 	//u8g2.clearBuffer();
 	u8g2.setFont(u8g2_font_8x13B_tr);	//10px
-	u8g2.drawStr(40, 10, "WIFISTATE.isAllowSend");
+	u8g2.drawStr(40, 10, "STATUS: ");
 	u8g2.setFont(u8g2_font_5x8_tr);		//6px
 	u8g2.drawStr(0, DIS.MESSAGE, "n  state target      now");
 	u8g2.setFont(u8g2_font_8x13B_tr);
@@ -54,7 +61,6 @@ void drawState() {
 	
 	u8g2.setCursor(len_space * 5/*len of "2 X "*/ + getDis(conPIP1.target, len_space), DIS.PIP1_Y);
 	u8g2.print(conPIP1.target, 1);
-	//u8g2.drawStr(u8g2.getStrWidth("2 O ")+extr_len, PIP2_Y, &String(target).toCharArray);
 	u8g2.setCursor(len_space * 11/*len of"1 O 116.3 "*/ + getDis(conPIP1.nowflow, len_space), DIS.PIP1_Y);
 	u8g2.print(conPIP1.nowflow, 1);
 
@@ -64,7 +70,6 @@ void drawState() {
 	else u8g2.drawStr(len_space * 3/*len of "2 "*/, DIS.PIP2_Y, "X");
 	u8g2.setCursor(len_space * 5/*len of "2 X "*/ + getDis(conPIP2.target, len_space), DIS.PIP2_Y);
 	u8g2.print(conPIP2.target, 1);
-	//u8g2.drawStr(u8g2.getStrWidth("2 O ")+extr_len, PIP2_Y, &String(target).toCharArray);
 	u8g2.setCursor(len_space * 11/*len of"1 O 116.3 "*/ + getDis(conPIP2.nowflow, len_space), DIS.PIP2_Y);
 	u8g2.print(conPIP2.nowflow, 1);
 
@@ -74,12 +79,25 @@ void drawState() {
 	else u8g2.drawStr(len_space * 3/*len of "2 "*/, DIS.PIP3_Y, "X");
 	u8g2.setCursor(len_space * 5/*len of "2 X "*/ + getDis(conPIP3.target, len_space), DIS.PIP3_Y);
 	u8g2.print(conPIP3.target, 1);
-	//u8g2.drawStr(u8g2.getStrWidth("2 O ")+extr_len, PIP2_Y, &String(target).toCharArray);
 	u8g2.setCursor(len_space * 11/*len of"1 O 116.3 "*/ + getDis(conPIP3.nowflow, len_space), DIS.PIP3_Y);
 	u8g2.print(conPIP3.nowflow, 1);
-
 	u8g2.sendBuffer();
 }
+
+void drawFinish(bool yes) {
+	u8g2.clearBuffer();
+
+	u8g2.setFont(u8g2_font_helvB12_tr);			//12px
+	if (yes) {
+		u8g2.drawStr(30, 35, "FINISH");
+	}
+	else {
+		u8g2.drawStr(30, 35, "UNFINISH");
+	}
+	
+	u8g2.sendBuffer();
+}
+
 
 void showSerial() {
 	Serial.println("\n....run MyDisplay....");
