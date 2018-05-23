@@ -14,16 +14,22 @@ void drawLogo() {
 	u8g2.drawStr(28, 25, "Multi-pipe");
 	u8g2.setFont(u8g2_font_8x13B_tr);
 	u8g2.drawStr(10, 40, "control system");  //8px
-	u8g2.setFont(u8g2_font_ncenB08_tr);
-	u8g2.drawStr(20, 60, "waiting for order. . .");
+	drawInfo(20,62,"   no connection...");
 	u8g2.sendBuffer();
+}
+
+void drawInfo(int x, int y,char * info) {
+	//char s[100];
+	//info.toCharArray(s,info.length);
+	u8g2.setFont(u8g2_font_ncenB08_tr);
+	u8g2.drawStr(x, y,info);
 }
 
 void drawDisplay() {
 	//u8g2.clearDisplay();
 	//u8g2.clearBuffer();
 	u8g2.setFont(u8g2_font_8x13B_tr);	//10px
-	u8g2.drawStr(40, 10, "STATUS");
+	u8g2.drawStr(40, 10, "WIFISTATE.isAllowSend");
 	u8g2.setFont(u8g2_font_5x8_tr);		//6px
 	u8g2.drawStr(0, DIS.MESSAGE, "n  state target      now");
 	u8g2.setFont(u8g2_font_8x13B_tr);

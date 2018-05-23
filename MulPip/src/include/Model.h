@@ -3,6 +3,7 @@ struct
 	volatile bool isOpen=false;
 	bool isConnected = false;
 	int connectedId = -1;
+	volatile int isAllowSend= 201;	//SEND_REJECT
 }WIFISTATE;
 
 

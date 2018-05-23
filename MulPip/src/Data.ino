@@ -11,9 +11,9 @@ int recvWifiData() {
 		//flag = revData(); //接收信息，并且保存到config结构体中
 		//printConfig(); //打印接收到的信息，供调试使用
 		if (flag_RECV == FIND_STATUS) {
-			sendData(STATUS);
+			sendData(WIFISTATE.isAllowSend);
 		}
-		if (STATUS == SEND_REJECT) {	//当前不允许接收数据
+		if (WIFISTATE.isAllowSend == SEND_REJECT) {	//当前不允许接收数据
 										//data=esp8266.recvString();
 			sendData(SEND_REJECT);
 			return STOP;
@@ -21,7 +21,7 @@ int recvWifiData() {
 		if (flag_RECV == RECV_WRONG) {
 			sendData(RECV_WRONG);
 		}
-		else if (flag_RECV == RECV_SUCCESS && STATUS == SEND_ALLOWED) {
+		else if (flag_RECV == RECV_SUCCESS && WIFISTATE.isAllowSend == SEND_ALLOWED) {
 			sendData(RECV_SUCCESS);
 			return START;
 		}
@@ -49,9 +49,12 @@ int getRightData(String &recv) {
 		recv = tmpdata.substring(pos + 1, tmpdata.length());
 	}
 	else if (tmpdata.indexOf(",CONNECTED") != -1) {
-		Serial.print("have connection");
+		Serial.print("have connection: id = ");
 		int id;
 		id = tmpdata.toInt()  ;
+		Serial.println(id);
+		WIFISTATE.connectedId = id;
+		WIFISTATE.isConnected = true;
 	}
 	return flag;
 }

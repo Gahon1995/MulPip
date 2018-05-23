@@ -4,7 +4,7 @@
 
 //初始化串口
 void initSerial() {
-	Serial.begin(19200);
+	Serial.begin(115200);
 	Serial1.begin(9600);
 }
 

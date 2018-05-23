@@ -34,7 +34,7 @@ volatile WIFIDATA wifidata;
 //String recv = "";
 //String tmp_recv = "";
 
-volatile int STATUS = SEND_ALLOWED;
+//volatile int WIFISTATE.isAllowSend = SEND_ALLOWED;
 volatile int isFINISHED = JOB_UNFINISH; //标志： 判断当前管道是否完成配置
 volatile int FLAG_jobStatus = JOB_FINISH;
 //volatile bool WIFISTATE.isOpen;

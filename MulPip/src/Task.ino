@@ -21,16 +21,16 @@ void MyWiFi() {
 	if (tWiFi.isFirstIteration()) {
 		FLAG_tWiFi = true;
 	}
-	//Serial.print("run MyWiFi...STATUS: ");
-	//Serial.println(STATUS);
+	//Serial.print("run MyWiFi...WIFISTATE.isAllowSend: ");
+	//Serial.println(WIFISTATE.isAllowSend);
 	if (WIFISTATE.isOpen) {
-		if (FLAG_tWiFi && STATUS == SEND_ALLOWED) {
+		if (FLAG_tWiFi && WIFISTATE.isAllowSend == SEND_ALLOWED) {
 			FLAG_tWiFi = false;
 			//Serial.println("recv WiFi data");
 			if (Serial1.available() > 2) {
 				Serial.println("has Data:....");
 				if (recvWifiData() == START) {
-					STATUS = SEND_REJECT;	//设置不允许继续发送数据
+					WIFISTATE.isAllowSend = SEND_REJECT;	//设置不允许继续发送数据
 					startControl();
 
 				}
@@ -82,7 +82,7 @@ void disableMyStatus() {
 		Serial.println("startControl finish:....");
 	}
 	initConInfo();
-	STATUS = SEND_ALLOWED;	//允许发送数据
+	WIFISTATE.isAllowSend = SEND_ALLOWED;	//允许发送数据
 	ts.deleteTask(tStatus);
 }
 

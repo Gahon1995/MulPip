@@ -70,7 +70,8 @@ bool init_WIFI() {
 		Serial.println("AT+CIPSERVER=1,8086 is failed");
 		 return false;
 	}
-
+	WIFISTATE.isOpen = true;
+	WIFISTATE.isAllowSend = SEND_ALLOWED;
 	return true;
 }
 
