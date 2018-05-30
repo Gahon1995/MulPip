@@ -35,7 +35,7 @@ void MyDisplay() {
 	}
 	else if (FLAG_jobStatus == JOB_RUNNING) {
 		last = 1;
-		showSerial();
+		//showSerial();
 		drawState();
 	}
 	

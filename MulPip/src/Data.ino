@@ -46,8 +46,8 @@ int getRightData(String &recv,int &mid) {
 	int id=-1;
 	delay(1);
 	tmpdata = recvString();
-	Serial.print("data recv: ");
-	Serial.println(tmpdata);
+	//Serial.print("data recv: ");
+	//Serial.println(tmpdata);
 	if (tmpdata.indexOf("+IPD") != -1) {
 		flag = 1;
 		int pos = tmpdata.indexOf(":");
@@ -55,8 +55,8 @@ int getRightData(String &recv,int &mid) {
 		Serial.println(pos);*/
 		int i = tmpdata.indexOf(",");
 		mid = tmpdata.substring(i + 1, i + 2).toInt();
-		Serial.print("data id: :");
-		Serial.println(mid);
+		//Serial.print("data id: :");
+		//Serial.println(mid);
 		recv = tmpdata.substring(pos + 1, tmpdata.length());
 	}
 	else {

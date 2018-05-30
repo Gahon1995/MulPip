@@ -121,7 +121,7 @@ bool sendString(String sysdata,int id) {
 	Serial1.println(sysdata.length());
 	if (Serial1.find(">")) //healthy response
 	{
-		Serial.print("ready to send-->");
+		Serial.print("ready to send code--> ");
 		Serial.print(sysdata);
 		delay(5);
 		Serial1.println(sysdata);
@@ -129,7 +129,7 @@ bool sendString(String sysdata,int id) {
 	}
 	if (Serial1.find("OK")) //healthy response
 	{
-		Serial.println("-->SEND OK");
+		Serial.println(" -->SEND OK");
 		return true;
 	}else return  false;
 	
