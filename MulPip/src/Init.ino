@@ -47,6 +47,8 @@ void initConInfo() {
 	conPIP1.pipOpenKey = SWITCH_1;
 	conPIP1.target = 0.0;
 	conPIP1.finish = PIP_NOTRUNNING;
+	conPIP1.countFunction = countPIP1;
+	conPIP1.lastCount = 0;
 
 	conPIP2.nowflow = 0.0;
 	conPIP2.needControl = false;
@@ -54,6 +56,8 @@ void initConInfo() {
 	conPIP2.pipOpenKey = SWITCH_3;
 	conPIP2.target = 0.0;
 	conPIP2.finish = PIP_NOTRUNNING;
+	conPIP2.countFunction = countPIP2;
+	conPIP2.lastCount = 0;
 
 	conPIP3.nowflow = 0.0;
 	conPIP3.needControl = false;
@@ -61,6 +65,8 @@ void initConInfo() {
 	conPIP3.pipOpenKey = SWITCH_3;
 	conPIP3.target = 0.0;
 	conPIP3.finish = PIP_NOTRUNNING;
+	conPIP3.countFunction = countPIP1;
+	conPIP3.lastCount = 0;
 }
 void initData() {
 	//count = 0;

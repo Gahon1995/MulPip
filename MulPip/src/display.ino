@@ -6,6 +6,7 @@ struct DIS
 	int PIP3_Y = 62;
 }DIS;	//显示屏各行的位置
 
+
 void drawLogo() {
 	//u8g2.clearDisplay();
 	u8g2.clearBuffer();

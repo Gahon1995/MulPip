@@ -1,3 +1,6 @@
+/**
+		接收wifi数据
+**/
 int recvWifiData() {
 	//有信息，需要接收，然后处理
 	String recv = "";
@@ -40,6 +43,9 @@ int recvWifiData() {
 	/***********TODO --- 硬件复位，或者变量复位***********************/
 }
 
+/**
+	去掉wifi数据中多余的数字
+**/
 int getRightData(String &recv,int &mid) {
 	String tmpdata="";
 	int flag = 0;
@@ -93,7 +99,9 @@ int getRightData(String &recv,int &mid) {
 	return flag;
 }
 
-
+/**
+	格式化WiFi数据内容
+**/
 int formatData(String &recv) {
 	//String data;
 	int flagRecv;
@@ -134,9 +142,21 @@ int formatData(String &recv) {
 			conPIP3.needControl = wifidata.num_3;
 			conPIP3.target = wifidata.vol_3;
 			return RECV_SUCCESS; //正确接收
-		}
-			
+		}			
 		return RECV_WRONG;
 	}
 	return 123;
+}
+
+volatile long countpip1 = 0;
+void countPIP1() {
+	countpip1++;
+}
+volatile long countpip2 = 0;
+void countPIP2() {
+	countpip2++;
+}
+volatile long countpip3 = 0;
+void countPIP3() {
+	countpip3++;
 }

@@ -24,11 +24,11 @@ Task tConPIP3(0.001 * TASK_SECOND, TASK_FOREVER, controlPIP3, NULL, false, NULL,
 
 //显示屏声明
 U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);
-
+//模拟管道数据声明
 volatile PIPCONFIG pip1, pip2, pip3;
-
+//执行控制时用于保存相关管道数据
 volatile CONINFO conPIP1, conPIP2, conPIP3;
-
+// 保存wifi信息
 volatile WIFIDATA wifidata;
 
 
@@ -61,5 +61,5 @@ void setup()
 
 void loop()
 {
-	ts.execute();
+	ts.execute();	//执行任务
 }

@@ -76,40 +76,25 @@ bool init_WIFI() {
 }
 
 bool sendData(int data) {
-	//----TODO 将所有的发送命令统一到一起，方便统一管理
-
-	/*Serial.print("send:");
-	Serial.println(String(data));*/
 	return sendString(String(data), WIFISTATE.connectedId);
 }
 
 bool sendData(int data,int id) {
-	//----TODO 将所有的发送命令统一到一起，方便统一管理
-
-	/*Serial.print("send:");
-	Serial.println(String(data));*/
 	return sendString(String(data),id);
 }
 
 String recvString() {
 	char a;
 	String tmp_recv = "";
-	//if (Serial1.available())
-	//{
-	//Serial.print("Serial1.available:  ");
 		while (Serial1.available())
 		{
-			//Serial.print(Serial1.available());
-			//Serial.print("-");
+
 			a = Serial1.read();
 			if (a == '\0' || a == '\n' || a == '\r') continue;
 			tmp_recv = tmp_recv + a;
 			delay(2);
 		}
-		//Serial.println(tmp_recv);	
-	//}
-		//Look();
-		//Serial1.flush();
+
 	return tmp_recv;
 }
 

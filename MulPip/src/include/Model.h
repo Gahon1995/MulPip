@@ -28,6 +28,8 @@ struct CONINFO
 	int pipNum;			//控制目标的管道，用于打开中断
 	int pipOpenKey;		//控制目标开关引脚号
 	volatile int finish;		//控制是否结束
+	void (*countFunction)(void);
+	volatile long lastCount;
 };
 
 

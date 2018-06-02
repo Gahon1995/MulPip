@@ -5,17 +5,9 @@
 #define _TASK_SLEEP_ON_IDLE_RUN
 #define _TASK_TIMEOUT
 
-#include <TaskScheduler.h>
-
-
-//#include <MyESP8266.h>	//WiFi库
-
-#include <ArduinoJson.h>
-
-
+#include <TaskScheduler.h>	//多任务调度库
+#include <ArduinoJson.h>	//解析WIFI json格式数据使用的库
 #include <U8g2lib.h>	//OLED 显示屏库
-
-
 #include "Model.h"	//使用的数据结构体定义
 
 
@@ -57,10 +49,10 @@
 #define SWITCH_2 32
 #define SWITCH_3 33
 
-//简单函数定义
+//简单函数定义	使用模拟方式时不用
 #define SWITCH_ON(SWITCH) digitalWrite(SWITCH,HIGH)
 #define SWITCH_OFF(SWITCH) digitalWrite(SWITCH,LOW)
-#define OPENINTERRUPT(PIP) attachInterrupt(digitalPinToInterrupt(PIP), countPip, FALLING);
+#define OPENINTERRUPT(PIP,count) attachInterrupt(digitalPinToInterrupt(PIP), count, FALLING);
 #define CLOSEINTERRUPT(PIP) detachInterrupt(digitalPinToInterrupt(PIP));
 
 

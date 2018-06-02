@@ -1,12 +1,12 @@
-
+/**
+	添加管道控制任务
+ */
 void addControlTask() {
 	if (conPIP1.needControl==1) {
 		Serial.println("add task controlPIP1");
 		ts.addTask(tConPIP1);
 		tConPIP1.setTimeout(60 * TASK_SECOND);
 		tConPIP1.restart();
-
-		
 	}
 	if (conPIP2.needControl==1) {
 		Serial.println("add task controlPIP2");
@@ -21,7 +21,9 @@ void addControlTask() {
 		tConPIP3.restartDelayed(983);
 	}
 }
-
+/**
+	关闭管道控制任务
+*/
 void disableControlTask() {
 	if (tConPIP1.isEnabled()) {
 		tConPIP1.disable();
@@ -34,8 +36,11 @@ void disableControlTask() {
 	}
 	
 }
+/**
+	开始执行管道控制
+*/
 int startControl() {
-	//	//TODO-- 目前是一个一个处理，写完以后可以变量传递，实现一个函数搞定
+	
 	addControlTask();
 	Serial.println("begin running......");
 	FLAG_jobStatus = JOB_RUNNING;
@@ -45,15 +50,28 @@ int startControl() {
 	tStatus.restart();	
 	Serial.println("waiting return.....");
 }
-
+/**
+		打开各个管道
+	pip: 管道的配置变量
+	controlPIP: 控制管道的结构体变量
+*/
 void openPIP(volatile PIPCONFIG * pip, volatile CONINFO * controlPIP) {
 	pip->state = true;
-	
+	//打开开关
+	OPENINTERRUPT(controlPIP->pipNum, controlPIP->countFunction);
+	SWITCH_ON(controlPIP->pipOpenKey);
 	controlPIP->finish = PIP_RUNNING;
 }
-
+/**
+	关闭模拟管道
+	pip: 管道的配置变量
+	controlPIP: 控制管道的结构体变量
+	timeout: 是否超时
+*/
 void closePIP(volatile PIPCONFIG * pip, volatile CONINFO * controlPIP,bool timeout) {
 	pip->state = false;
+	CLOSEINTERRUPT(controlPIP->pipNum, controlPIP->countFunction);
+	SWITCH_OFF(controlPIP->pipOpenKey);
 	if (timeout) {
 		controlPIP->finish = PIP_UNFINISH;
 		Serial.println("run controlPIP timeout");
@@ -64,6 +82,13 @@ void closePIP(volatile PIPCONFIG * pip, volatile CONINFO * controlPIP,bool timeo
 	}
 	pip->step = STEP;
 }
+/**
+	改管道是否应该关闭
+		pip: 管道的配置变量
+		controlPIP: 控制管道的结构体变量
+	返回 bool： true -> 需要关闭
+				false-> 不需要关闭
+*/
 bool shouldFinish(volatile PIPCONFIG * pip, volatile CONINFO * controlPIP) {
 	controlPIP->nowflow = pip->flow;
 	if ((controlPIP->target - controlPIP->nowflow) <= STEP * 2) {
@@ -76,7 +101,11 @@ bool shouldFinish(volatile PIPCONFIG * pip, volatile CONINFO * controlPIP) {
 		return false;
 	}
 }
-
+/**
+		模拟管道函数
+	isFirst： 是否为第一次运行该任务
+	pip: 需要模拟的管道
+*/
 void simulatePIP(bool isFirst, volatile PIPCONFIG *pip) {
 	if (isFirst) {
 		Serial.println("init PIP....");
