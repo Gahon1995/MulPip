@@ -8,7 +8,7 @@ struct
 
 
 //Wi-Fi信息保存
-typedef struct WIFIDATA
+struct WIFIDATA
 {
 	
 	int num_1;
@@ -20,7 +20,7 @@ typedef struct WIFIDATA
 };
 
 
-typedef struct CONINFO
+struct CONINFO
 {
 	bool needControl;		//是否进行控制
 	volatile double target;		//控制的目标值
@@ -39,10 +39,11 @@ typedef struct CONINFO
 //	int switchKey;
 //};
 
-typedef struct PIPCONFIG
+struct PIPCONFIG
 {
 	//int control;	//是否进行控制标志
 	volatile double flow;	//实时流量
 	volatile bool state;	//开关状态
 	volatile double step;
 };
+

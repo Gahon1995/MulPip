@@ -46,3 +46,50 @@ int startControl() {
 	Serial.println("waiting return.....");
 }
 
+void openPIP(volatile PIPCONFIG * pip, volatile CONINFO * controlPIP) {
+	pip->state = true;
+	
+	controlPIP->finish = PIP_RUNNING;
+}
+
+void closePIP(volatile PIPCONFIG * pip, volatile CONINFO * controlPIP,bool timeout) {
+	pip->state = false;
+	if (timeout) {
+		controlPIP->finish = PIP_UNFINISH;
+		Serial.println("run controlPIP timeout");
+	}
+	else {
+		controlPIP->finish = PIP_FINISH;
+		Serial.println("finish controlPIP1");
+	}
+	pip->step = STEP;
+}
+bool shouldFinish(volatile PIPCONFIG * pip, volatile CONINFO * controlPIP) {
+	controlPIP->nowflow = pip->flow;
+	if ((controlPIP->target - controlPIP->nowflow) <= STEP * 2) {
+		pip->step = 0.1;
+	}
+	if (controlPIP->target <= controlPIP->nowflow) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+void simulatePIP(bool isFirst, volatile PIPCONFIG *pip) {
+	if (isFirst) {
+		Serial.println("init PIP....");
+		pip->state = false;
+		pip->flow = 0.0;
+		pip->step = STEP;
+	}
+
+	if (pip->state) {
+
+		pip->flow += pip->step;
+	}
+	else {
+		pip->flow = 0.0;
+	}
+}

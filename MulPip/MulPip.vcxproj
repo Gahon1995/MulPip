@@ -97,4 +97,9 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties arduino.build.skip_library_file_if_exists_in_project="0" arduino.build.auto_discover_includes="1" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

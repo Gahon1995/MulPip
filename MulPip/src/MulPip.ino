@@ -28,16 +28,14 @@ U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);
 volatile PIPCONFIG pip1, pip2, pip3;
 
 volatile CONINFO conPIP1, conPIP2, conPIP3;
-//WIFISTATE wifistate;
+
 volatile WIFIDATA wifidata;
 
-//String recv = "";
-//String tmp_recv = "";
 
-//volatile int WIFISTATE.isAllowSend = SEND_ALLOWED;
+
 volatile int isFINISHED = JOB_UNFINISH; //标志： 判断当前管道是否完成配置
 volatile int FLAG_jobStatus = JOB_FINISH;
-//volatile bool WIFISTATE.isOpen;
+
 
 
 
