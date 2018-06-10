@@ -99,7 +99,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties arduino.build.skip_library_file_if_exists_in_project="0" arduino.build.auto_discover_includes="1" />
+      <UserProperties arduino.build.skip_library_file_if_exists_in_project="0" VM.DebugVariablesWindow.ColumnVisibleVariableValueMin="0" VM.DebugVariablesWindow.ColumnVisibleVariableValueMax="0" arduino.build.auto_discover_includes="1" VM.DebugVariablesWindow.ColumnVisibleVariableTimeStamp="1" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

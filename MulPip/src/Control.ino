@@ -60,6 +60,7 @@ void openPIP(volatile PIPCONFIG * pip, volatile CONINFO * controlPIP) {
 	//打开开关
 	OPENINTERRUPT(controlPIP->pipNum, controlPIP->countFunction);
 	SWITCH_ON(controlPIP->pipOpenKey);
+
 	controlPIP->finish = PIP_RUNNING;
 }
 /**
@@ -70,7 +71,7 @@ void openPIP(volatile PIPCONFIG * pip, volatile CONINFO * controlPIP) {
 */
 void closePIP(volatile PIPCONFIG * pip, volatile CONINFO * controlPIP,bool timeout) {
 	pip->state = false;
-	CLOSEINTERRUPT(controlPIP->pipNum, controlPIP->countFunction);
+	CLOSEINTERRUPT(controlPIP->pipNum);
 	SWITCH_OFF(controlPIP->pipOpenKey);
 	if (timeout) {
 		controlPIP->finish = PIP_UNFINISH;
@@ -82,6 +83,7 @@ void closePIP(volatile PIPCONFIG * pip, volatile CONINFO * controlPIP,bool timeo
 	}
 	pip->step = STEP;
 }
+
 /**
 	改管道是否应该关闭
 		pip: 管道的配置变量
@@ -92,7 +94,7 @@ void closePIP(volatile PIPCONFIG * pip, volatile CONINFO * controlPIP,bool timeo
 bool shouldFinish(volatile PIPCONFIG * pip, volatile CONINFO * controlPIP) {
 	controlPIP->nowflow = pip->flow;
 	if ((controlPIP->target - controlPIP->nowflow) <= STEP * 2) {
-		pip->step = 0.1;
+		pip->step = 0.1;	
 	}
 	if (controlPIP->target <= controlPIP->nowflow) {
 		return true;
@@ -121,4 +123,43 @@ void simulatePIP(bool isFirst, volatile PIPCONFIG *pip) {
 	else {
 		pip->flow = 0.0;
 	}
+}
+//更新管道1当前流量
+void getPIP1_Flow() {
+	long nowcount = countpip1;
+	conPIP1.nowflow = nowcount * 0.17;
+	//double f = (nowcount - conPIP1.lastCount) / READ_TIME;
+	//
+	//conPIP1.lastCount = nowcount;
+	//double Q = (f / 98.0)*(100.0/6.0);  // 流速  mL/s
+	//
+	//conPIP1.nowflow += Q * READ_TIME;
+	//Serial.print("PIP1 flow :  nowcount:");
+	//Serial.print(nowcount);
+	//Serial.print(" conPIP1.lastCount:");
+	//Serial.print(conPIP1.lastCount);
+	//Serial.print(" f:");
+	//Serial.print(f);
+	//Serial.print(" Q:");
+	//Serial.print(Q);
+	//Serial.print(" nowflow:");
+	//Serial.println(conPIP1.nowflow);
+}
+//更新管道2当前流量
+void getPIP2_Flow() {
+	long nowcount = countpip2;
+	conPIP2.nowflow = nowcount * 0.17;
+	//double f = (nowcount - conPIP2.lastCount) / READ_TIME;
+	//conPIP2.lastCount = nowcount;
+	//double Q = (f / 98.0)*(100.0 / 6.0);  // 流速  mL/s
+	//conPIP2.nowflow += Q * READ_TIME;
+}
+//更新管道3当前流量
+void getPIP3_Flow() {
+	long nowcount = countpip3;
+	conPIP3.nowflow = nowcount * 0.17;
+	//double f = (nowcount - conPIP3.lastCount) / READ_TIME;	//Hz
+	//conPIP3.lastCount = nowcount;
+	//double Q = (f / 98.0)*(100.0 / 6.0);  // 流速  mL/s
+	//conPIP3.nowflow += Q * READ_TIME;
 }

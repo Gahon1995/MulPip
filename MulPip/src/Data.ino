@@ -148,15 +148,15 @@ int formatData(String &recv) {
 	return 123;
 }
 
-volatile long countpip1 = 0;
+
 void countPIP1() {
 	countpip1++;
 }
-volatile long countpip2 = 0;
+
 void countPIP2() {
 	countpip2++;
 }
-volatile long countpip3 = 0;
+
 void countPIP3() {
 	countpip3++;
 }

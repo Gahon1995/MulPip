@@ -5,11 +5,11 @@ bool FLAG_tDisplay = true;
 bool FLAG_tWiFi = false;
 
 
-int last=0;
+bool justRun=false;
 void MyDisplay() {
 	if(tDisplay.isFirstIteration())
 		Serial.println("Run MyDisplay");
-	if (conPIP1.finish == PIP_NOTRUNNING && conPIP2.finish == PIP_NOTRUNNING && conPIP3.finish == PIP_NOTRUNNING) {
+	if (disInfo._1_finish == PIP_NOTRUNNING && disInfo._2_finish == PIP_NOTRUNNING && disInfo._3_finish == PIP_NOTRUNNING) {
 		if (WIFISTATE.isConnected) {
 			drawCon();
 		}
@@ -19,22 +19,22 @@ void MyDisplay() {
 		}
 		
 	}
-	else if (FLAG_jobStatus == JOB_FINISH && last == 1) {
+	else if (FLAG_jobStatus == JOB_FINISH && justRun) {
 		drawFinish(true);
 		delay(1000);
 		drawState();
 		tDisplay.delay(3000);
-		last = 0;
-		initConInfo();
+		justRun = false;
+		//initConInfo();
 	}
-	else if (FLAG_jobStatus == JOB_UNFINISH && last == 1) {
+	else if (FLAG_jobStatus == JOB_UNFINISH && justRun ) {
 		drawFinish(false);
 		tDisplay.delay(3000);
-		last = 0;
-		initConInfo();
+		justRun = false;
+		//initConInfo();
 	}
 	else if (FLAG_jobStatus == JOB_RUNNING) {
-		last = 1;
+		justRun = true;
 		//showSerial();
 		drawState();
 	}
@@ -91,9 +91,11 @@ void MyStatus() {
 		disableControlTask();
 		tStatus.disable();
 	}
+	getDisInfo();
 }
 
 void disableMyStatus() {
+	initConInfo();
 	if (tStatus.timedOut()) {
 		FLAG_jobStatus = JOB_UNFINISH;
 		Serial.println("startControl timeout:....");
@@ -143,7 +145,12 @@ void controlPIP1() {
 		/*pip1.state = true;
 		conPIP1.finish = PIP_RUNNING;*/
 	}
-	
+	//---------------以下为实际管道时启用-------------------------
+	//getPIP1_Flow();
+	//if (conPIP1.target <= conPIP1.nowflow) {
+	//	tConPIP1.disable();
+	//}
+	//---------------以下为模拟管道时启用-------------------------
 	if (shouldFinish(&pip1, &conPIP1)) {
 		tConPIP1.disable();
 	}
@@ -180,6 +187,12 @@ void controlPIP2() {
 		Serial.println("begin running controlPIP2");
 		openPIP(&pip2, &conPIP2);
 	}
+	//---------------以下为实际管道时启用-------------------------
+	//getPIP2_Flow();
+	//if (conPIP2.target <= conPIP2.nowflow) {
+	//	tConPIP2.disable();
+	//}
+	//---------------以下为模拟管道时启用-------------------------
 	if (shouldFinish(&pip2, &conPIP2)) {
 		tConPIP2.disable();
 	}
@@ -196,6 +209,12 @@ void controlPIP3() {
 		conPIP3.finish = PIP_RUNNING;
 		openPIP(&pip3, &conPIP3);
 	}
+	//---------------以下为实际管道时启用-------------------------
+	//getPIP3_Flow();
+	//if (conPIP3.target <= conPIP3.nowflow) {
+	//	tConPIP3.disable();
+	//}
+	//---------------以下为模拟管道时启用-------------------------
 	if (shouldFinish(&pip3, &conPIP3)) {
 		tConPIP3.disable();
 	}

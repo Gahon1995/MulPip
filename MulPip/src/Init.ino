@@ -65,9 +65,24 @@ void initConInfo() {
 	conPIP3.pipOpenKey = SWITCH_3;
 	conPIP3.target = 0.0;
 	conPIP3.finish = PIP_NOTRUNNING;
-	conPIP3.countFunction = countPIP1;
+	conPIP3.countFunction = countPIP3;
 	conPIP3.lastCount = 0;
 }
+
+void getDisInfo() {
+	disInfo._1_finish  = conPIP1.finish;
+	disInfo._1_nowflow = conPIP1.nowflow;
+	disInfo._1_target  = conPIP1.target;
+
+	disInfo._2_finish  = conPIP2.finish;
+	disInfo._2_nowflow = conPIP2.nowflow;
+	disInfo._2_target  = conPIP2.target;
+
+	disInfo._3_finish  = conPIP3.finish;
+	disInfo._3_nowflow = conPIP3.nowflow;
+	disInfo._3_target  = conPIP3.target;
+}
+
 void initData() {
 	//count = 0;
 	//precount = count;

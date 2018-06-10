@@ -33,13 +33,18 @@ struct CONINFO
 };
 
 
-//typedef struct CONFIG
-//{
-//	int num;
-//	double flow;
-//	int pip;
-//	int switchKey;
-//};
+struct DISCONFIG
+{
+	volatile double _1_target;		//控制的目标值
+	volatile double _1_nowflow;		//实时目标值
+	volatile int    _1_finish;		//控制是否结束
+	volatile double _2_target;		//控制的目标值
+	volatile double _2_nowflow;		//实时目标值
+	volatile int    _2_finish;		//控制是否结束
+	volatile double _3_target;		//控制的目标值
+	volatile double _3_nowflow;		//实时目标值
+	volatile int    _3_finish;		//控制是否结束
+};
 
 struct PIPCONFIG
 {

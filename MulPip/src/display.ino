@@ -55,33 +55,33 @@ void drawState() {
 	u8g2.setFont(u8g2_font_8x13B_tr);
 	int len_space = u8g2.getStrWidth(" ");
 
-	if (conPIP1.finish == PIP_RUNNING) {
+	if (disInfo._1_finish == PIP_RUNNING) {
 		u8g2.drawStr(len_space * 3/*len of "2 "*/, DIS.PIP1_Y,"O");
 	}
 	else u8g2.drawStr(len_space * 3/*len of "2 "*/, DIS.PIP1_Y, "X");
 	
-	u8g2.setCursor(len_space * 5/*len of "2 X "*/ + getDis(conPIP1.target, len_space), DIS.PIP1_Y);
-	u8g2.print(conPIP1.target, 1);
-	u8g2.setCursor(len_space * 11/*len of"1 O 116.3 "*/ + getDis(conPIP1.nowflow, len_space), DIS.PIP1_Y);
-	u8g2.print(conPIP1.nowflow, 1);
+	u8g2.setCursor(len_space * 5/*len of "2 X "*/ + getDis(disInfo._1_target, len_space), DIS.PIP1_Y);
+	u8g2.print(disInfo._1_target, 1);
+	u8g2.setCursor(len_space * 11/*len of"1 O 116.3 "*/ + getDis(disInfo._1_nowflow, len_space), DIS.PIP1_Y);
+	u8g2.print(disInfo._1_nowflow, 1);
 
-	if (conPIP2.finish == PIP_RUNNING) {
+	if (disInfo._2_finish == PIP_RUNNING) {
 		u8g2.drawStr(len_space * 3/*len of "2 "*/, DIS.PIP2_Y, "O");
 	}
 	else u8g2.drawStr(len_space * 3/*len of "2 "*/, DIS.PIP2_Y, "X");
-	u8g2.setCursor(len_space * 5/*len of "2 X "*/ + getDis(conPIP2.target, len_space), DIS.PIP2_Y);
-	u8g2.print(conPIP2.target, 1);
-	u8g2.setCursor(len_space * 11/*len of"1 O 116.3 "*/ + getDis(conPIP2.nowflow, len_space), DIS.PIP2_Y);
-	u8g2.print(conPIP2.nowflow, 1);
+	u8g2.setCursor(len_space * 5/*len of "2 X "*/ + getDis(disInfo._2_target, len_space), DIS.PIP2_Y);
+	u8g2.print(disInfo._2_target, 1);
+	u8g2.setCursor(len_space * 11/*len of"1 O 116.3 "*/ + getDis(disInfo._2_nowflow, len_space), DIS.PIP2_Y);
+	u8g2.print(disInfo._2_nowflow, 1);
 
-	if (conPIP3.finish == PIP_RUNNING) {
+	if (disInfo._3_finish == PIP_RUNNING) {
 		u8g2.drawStr(len_space * 3/*len of "2 "*/, DIS.PIP3_Y, "O");
 	}
 	else u8g2.drawStr(len_space * 3/*len of "2 "*/, DIS.PIP3_Y, "X");
-	u8g2.setCursor(len_space * 5/*len of "2 X "*/ + getDis(conPIP3.target, len_space), DIS.PIP3_Y);
-	u8g2.print(conPIP3.target, 1);
-	u8g2.setCursor(len_space * 11/*len of"1 O 116.3 "*/ + getDis(conPIP3.nowflow, len_space), DIS.PIP3_Y);
-	u8g2.print(conPIP3.nowflow, 1);
+	u8g2.setCursor(len_space * 5/*len of "2 X "*/ + getDis(disInfo._3_target, len_space), DIS.PIP3_Y);
+	u8g2.print(disInfo._3_target, 1);
+	u8g2.setCursor(len_space * 11/*len of"1 O 116.3 "*/ + getDis(disInfo._3_nowflow, len_space), DIS.PIP3_Y);
+	u8g2.print(disInfo._3_nowflow, 1);
 	u8g2.sendBuffer();
 }
 

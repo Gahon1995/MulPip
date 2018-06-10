@@ -50,8 +50,8 @@
 #define SWITCH_3 33
 
 //简单函数定义	使用模拟方式时不用
-#define SWITCH_ON(SWITCH) digitalWrite(SWITCH,HIGH)
-#define SWITCH_OFF(SWITCH) digitalWrite(SWITCH,LOW)
+#define SWITCH_ON(SWITCH) digitalWrite(SWITCH,LOW)
+#define SWITCH_OFF(SWITCH) digitalWrite(SWITCH,HIGH)
 #define OPENINTERRUPT(PIP,count) attachInterrupt(digitalPinToInterrupt(PIP), count, FALLING);
 #define CLOSEINTERRUPT(PIP) detachInterrupt(digitalPinToInterrupt(PIP));
 
@@ -63,7 +63,9 @@
 #define START 1
 #define STOP 0
 
-#define STEP 0.8
+#define STEP 0.6
+
+#define READ_TIME 0.001 
 
 
 //函数声明
